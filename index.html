@@ -1,3 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دانلود V2rayNG</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap');
+
+```
+    :root {
+        --primary: #2563eb;
+        --primary-dark: #1e40af;
+        --primary-light: #93c5fd;
+        --secondary: #64748b;
+        --light: #f8fafc;
+        --dark: #1e293b;
+        --gray: #e2e8f0;
+        --success: #10b981;
+        --gradient-start: #3b82f6;
+        --gradient-end: #1d4ed8;
+        --bg-primary: #f8fafc;
+        --bg-secondary: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --border-color: #e2e8f0;
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --container-bg: rgba(255, 255, 255, 0.95);
+        --input-bg: #ffffff;
+        --result-bg: #f1f5f9;
+        --icon-filter: none;
+        --placeholder-color: #64748b;
+    }
+    
+    .dark-mode {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --text-primary: #f8fafc;
+        --text-secondary: #cbd5e1;
+        --border-color: #334155;
+        --shadow-color: rgba(0, 0, 0, 0.3);
+        --container-bg: rgba(30, 41, 59, 0.9);
+        --input-bg: rgba(15, 23, 42, 0.6);
+        --result-bg: rgba(15, 23, 42, 0.6);
+        --icon-filter: invert(1);
+        --placeholder-color: #cbd5e1;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Vazirmatn', sans-serif;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+    
+    body {
+        background: var(--bg-primary);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        color: var(--text-primary);
+    }
+    
+    .container {
+        background: var(--container-bg);
+        backdrop-filter: blur(12px);
+        border-radius: 24px;
+        box-shadow: 0 15px 35px var(--shadow-color);
+        width: 100%;
+        max-width: 700px;
+        overflow: hidden;
+        padding: 0;
+        border: 1px solid var(--border-color);
+    }
+    
+    .header {
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        padding: 30px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        transform: rotate(30deg);
+    }
+    
+    .header h1 {
+        color: white;
+        font-size: 32px;
+        margin-bottom: 10px;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        position: relative;
+    }
+    
+    .header p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 16px;
+        position: relative;
+    }
+    
+    .creator {
+        margin-top: 15px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        position: relative;
+    }
+    
+    .theme-toggle {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: white;
+        font-size: 18px;
+        transition: all 0.3s;
+        z-index: 10;
+    }
+    
+    .theme-toggle:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(30deg);
+    }
+    
+    .content {
+        padding: 30px;
+    }
+    
+    .input-group {
+        margin-bottom: 25px;
+    }
+    
+    .input-group label {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--primary);
+        font-weight: 500;
+        font-size: 16px;
+    }
+    
+    select {
+        width: 100%;
+        padding: 16px;
+        border: 2px solid var(--border-color);
+        border-radius: 14px;
+        font-size: 16px;
+        background-color: var(--input-bg);
+        color: var(--text-primary);
+        cursor: pointer;
+    }
+    
+    button {
+        background: linear-gradient(to right, var(--primary), var(--primary-dark));
+        color: white;
+        border: none;
+        padding: 17px 25px;
+        border-radius: 14px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        width: 100%;
+        margin-top: 20px;
+        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: 0.5s;
+    }
+    
+    button:hover::before {
+        left: 100%;
+    }
+    
+    button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+    }
+    
+    button:active {
+        transform: translateY(0);
+    }
+    
+</style>
+```
+
+</head>
+<body class="light-mode">
+    <div class="container">
+        <div class="header">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <h1>دانلود V2rayNG</h1>
+            <p>نسخه مورد نظر خود را انتخاب کنید تا فایل <b>universal.apk</b> دانلود شود.</p>
+            <div class="creator">ساخته شده توسط Eternal Connect</div>
+        </div>
+
+```
     <div class="content">
         <div class="input-group">
             <label for="versionSelect">انتخاب نسخه <i class="fas fa-download icon"></i></label>
@@ -59,3 +288,7 @@
         });
     });
 </script>
+```
+
+</body>
+</html>
