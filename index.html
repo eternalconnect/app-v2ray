@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دانلود v2rayNG</title>
+    <title>دانلود V2rayNG</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap');
@@ -44,7 +44,6 @@
             --result-bg: rgba(15, 23, 42, 0.6);
             --icon-filter: invert(1);
             --placeholder-color: #cbd5e1;
-            --help-color: #10b981;
         }
         
         * {
@@ -71,7 +70,7 @@
             border-radius: 24px;
             box-shadow: 0 15px 35px var(--shadow-color);
             width: 100%;
-            max-width: 800px;
+            max-width: 700px;
             overflow: hidden;
             padding: 0;
             border: 1px solid var(--border-color);
@@ -117,6 +116,17 @@
             color: rgba(255, 255, 255, 0.7);
             position: relative;
         }
+
+        .creator a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .creator a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
         
         .theme-toggle {
             position: absolute;
@@ -147,7 +157,7 @@
         }
         
         .input-group {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         
         .input-group label {
@@ -157,23 +167,36 @@
             font-weight: 500;
             font-size: 16px;
         }
+
+        .dark-mode .input-group label {
+            color: var(--success);
+        }
+
+        .input-group label .icon {
+            color: inherit;
+        }
         
-        select, button {
+        select {
             width: 100%;
             padding: 16px;
             border: 2px solid var(--border-color);
             border-radius: 14px;
             font-size: 16px;
-            transition: all 0.3s;
             background-color: var(--input-bg);
             color: var(--text-primary);
-            unicode-bidi: plaintext;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%2364748b'%3e%3cpath d='M7 10l5 5 5-5H7z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 1rem center;
+            background-size: 1.2em;
+            padding-left: 3rem;
+            transition: border-color 0.3s;
         }
-        
-        select:focus {
-            outline: none;
+
+        select:focus, select:hover {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.3);
+            outline: none;
         }
         
         button {
@@ -186,15 +209,11 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
-            margin-top: 10px;
+            width: 100%;
+            margin-bottom: 30px;
             box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
             position: relative;
             overflow: hidden;
-        }
-        
-        button:disabled {
-            background: var(--secondary);
-            cursor: not-allowed;
         }
         
         button::before {
@@ -208,155 +227,38 @@
             transition: 0.5s;
         }
         
-        button:hover:not(:disabled)::before {
+        button:hover::before {
             left: 100%;
         }
         
-        button:hover:not(:disabled) {
+        button:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
         }
         
-        button:active:not(:disabled) {
+        button:active {
             transform: translateY(0);
         }
-        
-        .info-box {
-            margin-top: 30px;
-            background-color: var(--result-bg);
-            padding: 20px;
-            border-radius: 14px;
-            border: 2px solid var(--border-color);
-            color: var(--text-primary);
-            text-align: center;
-        }
-        
-        .info-box h3 {
-            margin-bottom: 15px;
-            color: var(--help-color, var(--primary));
-        }
-        
-        .notification {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            background: var(--success);
-            color: white;
-            padding: 18px 28px;
+
+        .guide {
+            margin-top: 0;
+            padding: 15px;
             border-radius: 12px;
-            box-shadow: 0 8px 20px var(--shadow-color);
-            transform: translateY(-100px);
-            opacity: 0;
-            transition: all 0.4s;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            background: var(--result-bg);
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
+            text-align: justify;
         }
-        
-        .notification.show {
-            transform: translateY(0);
-            opacity: 1;
+
+        .guide h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: 16px;
         }
-        
-        .icon {
-            margin-left: 10px;
-            filter: var(--icon-filter);
-        }
-        
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* تغییر رنگ labelها و آیکون‌ها در حالت شب */
-        .dark-mode .input-group label {
-            color: #10b981;
-        }
-        
-        .dark-mode .icon {
-            color: #10b981;
-            filter: none;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 0;
-            }
-            
-            .header {
-                padding: 25px 20px;
-            }
-            
-            .header h1 {
-                font-size: 26px;
-            }
-            
-            .content {
-                padding: 25px 20px;
-            }
-            
-            select, button {
-                padding: 14px;
-            }
-            
-            .notification {
-                right: 20px;
-                left: 20px;
-                top: 20px;
-            }
-        }
-        
-        /* اسکرول بار استایل */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-        
-        .pulse {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--success);
-            margin-left: 8px;
-            box-shadow: 0 0 0 rgba(16, 185, 129, 0.4);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            }
-           70% {
-                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-            }
+
+        .dark-mode .guide h3 {
+            color: var(--success);
         }
     </style>
 </head>
@@ -366,9 +268,11 @@
             <button class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon"></i>
             </button>
-            <h1>دانلود v2rayNG</h1>
-            <p>آخرین نسخه‌های v2rayNG مستقیماً از گیت‌هاب</p>
-            <div class="creator">ساخته شده توسط Eternal Connect</div>
+            <h1>دانلود V2rayNG</h1>
+            <p>نسخه مورد نظر خود را انتخاب کرده و دانلود کنید.</p>
+            <div class="creator">
+                <a href="https://t.me/eternal_connect" target="_blank">ساخته شده توسط Eternal Connect</a>
+            </div>
         </div>
         
         <div class="content">
@@ -378,22 +282,17 @@
             </div>
             
             <button id="downloadBtn">
-                <i class="fas fa-download"></i> دانلود نسخه انتخاب شده
+                <i class="fas fa-cloud-download-alt"></i> دانلود نسخه موردنظر
             </button>
-            
-            <div class="info-box">
+
+            <div class="guide">
                 <h3>راهنما</h3>
-                <p>این ابزار به شما امکان می‌دهد تا آخرین نسخه‌های نرم‌افزار v2rayNG را مستقیماً از صفحه انتشارات رسمی آن در گیت‌هاب دانلود کنید.</p>
-                <p>v2rayNG یک کلاینت V2Ray برای دستگاه‌های اندروید است که به شما امکان می‌دهد تا به راحتی به سرورهای V2Ray متصل شوید.</p>
-                <p>توصیه می‌شود نسخه universal را انتخاب کنید که با اکثر دستگاه‌های اندرویدی سازگار است.</p>
-                <p>تمامی لینک‌های دانلود مستقیماً از مخزن رسمی v2rayNG در GitHub دریافت می‌شوند و تضمین شده است.</p>
+                <p>
+                    پس از انتخاب نسخه مورد نظر و کلیک روی دکمه دانلود، فایل نصب <b>universal</b> به صورت مستقیم از مخزن رسمی GitHub دانلود خواهد شد.<br>
+                    پیشنهاد می‌شود همیشه آخرین نسخه را دریافت کنید تا از رفع باگ‌ها و امکانات جدید بهره‌مند شوید.
+                </p>
             </div>
         </div>
-    </div>
-    
-    <div class="notification" id="notification">
-        <i class="fas fa-check-circle"></i>
-        <span>در حال انتقال به صفحه دانلود...</span>
     </div>
 
     <script>
@@ -423,14 +322,6 @@
                 try {
                     const response = await fetch("https://api.github.com/repos/2dust/v2rayNG/releases");
                     const releases = await response.json();
-                    
-                    if (!releases || releases.length === 0) {
-                        versionSelect.innerHTML = '<option value="">هیچ نسخه‌ای یافت نشد</option>';
-                        return;
-                    }
-
-                    versionSelect.innerHTML = ''; // پاک کردن گزینه‌های قبلی
-                    
                     releases.forEach((release, index) => {
                         const option = document.createElement("option");
                         option.value = release.tag_name;
@@ -440,7 +331,6 @@
                     });
                 } catch (error) {
                     console.error("خطا در دریافت نسخه‌ها:", error);
-                    versionSelect.innerHTML = '<option value="">خطا در دریافت نسخه‌ها</option>';
                 }
             }
 
@@ -449,8 +339,7 @@
             downloadBtn.addEventListener('click', function() {
                 const version = versionSelect.value;
                 if (version) {
-                    const downloadUrl = `https://github.com/2dust/v2rayNG/releases/download/${version}/v2rayNG_${version}_universal.apk`;
-                    window.open(downloadUrl, '_blank');
+                    window.location.href = `https://github.com/2dust/v2rayNG/releases/download/${version}/v2rayNG_${version}_universal.apk`;
                 }
             });
         });
